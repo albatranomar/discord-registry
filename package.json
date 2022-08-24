@@ -26,6 +26,7 @@
   },
   "homepage": "https://github.com/albatranomar/slash-comands-cli#readme",
   "dependencies": {
+    "colors": "^1.4.0",
     "discord.js": "^14.2.0",
     "inquirer": "^9.1.0"
   }

@@ -1,15 +1,20 @@
 import { ApplicationCommandType } from 'discord.js';
 import inquirer from 'inquirer';
-import { chooseOptionType } from './createOption.js';
+import { ask4MultiOptions } from '../common/ask4MultiOptions.js';
 
-const _ = (s = '') => (' '.repeat(2) + s);
+const UIMessage = `
+        You can now provide us the command info.
+`;
 
-export async function createCommand() {
-    let commandData = await inquirer.prompt([
+export async function ask4CommandInfo() {
+    console.clear();
+
+    let CommandInfo = await inquirer.prompt([
         {
+            prefix: '',
             type: 'list',
             name: 'type',
-            message: _('what type of commmand is that?'),
+            message: `${UIMessage}\nwhat type of commmand is that?`,
             choices: [
                 {
                     key: 'chat_input',
@@ -31,7 +36,7 @@ export async function createCommand() {
         {
             type: 'input',
             name: 'name',
-            message: _("What's the name of this command?"),
+            message: "Command name:",
             validate(value) {
                 return RegExp(/^[-_\p{L}\p{N}\p{sc=Deva}\p{sc=Thai}]{1,32}$/iug).test(value.trim()) ? true : 'Please enter a valid command name';
             },
@@ -39,7 +44,7 @@ export async function createCommand() {
         {
             type: 'input',
             name: 'description',
-            message: _('Now provide a description for this command:'),
+            message: 'Command description:',
             when(answers) {
                 return (answers.type == ApplicationCommandType.ChatInput) ? true : false;
             },
@@ -51,47 +56,26 @@ export async function createCommand() {
                     return true;
                 }
 
-                return _('Please enter a valid command description');
+                return 'Please enter a valid command description';
             },
         },
         {
             type: 'confirm',
             name: 'dm_permission',
-            message: _('is that command available in dms?'),
+            message: 'is that command available in dms?',
             default: true
-        },
-        {
-            type: 'confirm',
-            name: 'options',
-            message: _('Does this command have options?'),
-            when(answers) {
-                return (answers.type == ApplicationCommandType.ChatInput) ? true : false;
-            },
-            default: false
         },
     ]);
 
-    if (commandData.options) {
-        let userAddingOptions = true;
-        let options = [];
-
-        while (userAddingOptions) {
-            let optionData = await chooseOptionType();
-            options.push(optionData);
-            let { confirmation } = await inquirer.prompt([{
-                type: 'confirm',
-                name: 'confirmation',
-                message: _('Do you want to add another option?'),
-                default: false
-            }]);
-            userAddingOptions = confirmation;
-        }
-
-        return ({
-            ...commandData,
-            options
-        })
-
+    if (CommandInfo.type == ApplicationCommandType.ChatInput) {
+        CommandInfo.options = await ask4MultiOptions('command', (options) => {
+            console.clear();
+            console.table({
+                ...CommandInfo,
+                options: options.map(o => o.name).join(',')
+            });
+        }, CommandInfo.name);
     }
-    return commandData;
+
+    return CommandInfo;
 }
