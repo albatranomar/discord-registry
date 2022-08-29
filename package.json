@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "An easy way to manage your bot slash/user/message commands.",
   "main": "dist/lib/index.js",
+  "bin": {
+    "discord-registry": "dist/bin/discord-registry.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/albatranomar/discord-registry.git"
@@ -32,10 +35,12 @@
     "@discordjs/collection": "^1.1.0",
     "@discordjs/rest": "^1.1.0",
     "colors": "^1.4.0",
+    "commander": "^9.4.0",
     "discord-api-types": "^0.37.5"
   },
   "devDependencies": {
     "@types/node": "^18.6.4",
+    "ts-node": "^10.8.2",
     "typescript": "^4.7.4"
   }
 }
