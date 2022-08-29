@@ -63,6 +63,7 @@ export class DiscordRegistry {
             Routes.applicationCommands(this.application_id)
         ) as RESTPostAPIApplicationCommandsJSONBody[]);
         if (refresh) {
+            this.commands.clear();
             commands.forEach(command => {
                 this.commands.set(command.name, command);
             });
