@@ -1,12 +1,12 @@
 {
-  "name": "slash-commands-cli",
+  "name": "discord-registry",
   "version": "1.0.0",
   "description": "Create/Edit/Delete Discord Slash Commands from you bot. using a easy cli. ",
   "main": "src/index.js",
   "type": "module",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/albatranomar/slash-comands-cli.git"
+    "url": "git+https://github.com/albatranomar/discord-registry.git"
   },
   "keywords": [
     "discord",
@@ -22,9 +22,9 @@
   "author": "albatranomar",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/albatranomar/slash-comands-cli/issues"
+    "url": "https://github.com/albatranomar/discord-registry/issues"
   },
-  "homepage": "https://github.com/albatranomar/slash-comands-cli#readme",
+  "homepage": "https://github.com/albatranomar/discord-registry#readme",
   "dependencies": {
     "colors": "^1.4.0",
     "discord.js": "^14.2.0",
