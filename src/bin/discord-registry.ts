@@ -1,12 +1,13 @@
 #!/usr/bin/env node
+
 import { Command } from 'commander';
 import { readFile } from 'node:fs/promises';
 import { URL } from 'node:url';
-import setup from './commands/setup';
+import setup from './commands/setup.js';
 
 const discord_registry = new Command();
 
-const packageFile = new URL('../package.json', import.meta.url);
+const packageFile = new URL('../../package.json', import.meta.url);
 const packageJson = JSON.parse(await readFile(packageFile, 'utf-8'));
 
 discord_registry
@@ -16,7 +17,6 @@ discord_registry
 discord_registry
     .command('setup')
     .description('creates a new discord-registry config file')
-    .option('-y, --yes')
     .action(setup);
 
 discord_registry
