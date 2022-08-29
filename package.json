@@ -1,7 +1,7 @@
 {
   "name": "discord-registry",
   "version": "1.0.0",
-  "description": "Create/Edit/Delete Discord Slash Commands from you bot. using a easy cli. ",
+  "description": "An easy way to manage your bot slash/user/message commands.",
   "main": "src/index.js",
   "type": "module",
   "repository": {
@@ -11,6 +11,7 @@
   "keywords": [
     "discord",
     "discord-cli",
+    "discord-registry",
     "discord-slash",
     "discord-slash-commands",
     "slash-commands",
