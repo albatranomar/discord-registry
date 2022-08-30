@@ -3,6 +3,7 @@
 import { Command } from 'commander';
 import { readFile } from 'node:fs/promises';
 import { URL } from 'node:url';
+import generate from './commands/generate.js';
 import setup from './commands/setup.js';
 
 const discord_registry = new Command();
@@ -21,13 +22,11 @@ discord_registry
 
 discord_registry
     .command('generate')
-    .description('generates a component/piece')
+    .description('generates a slash/user/message commands.')
     .alias('g')
-    .argument('<component>', 'component/piece name')
-    .argument('<name>', 'file name')
-    .action(() => {
-
-    });
+    .argument('<type>', 'type of the generated command (slash/user/message)')
+    .argument('[name]', 'command name')
+    .action(generate);
 
 discord_registry
     .command('init')
