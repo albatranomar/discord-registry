@@ -80,6 +80,17 @@ function createJSONCommand(command: RESTPostAPIApplicationCommandsJSONBody) {
 }
 
 export default async function () {
+    if (existsSync(path.resolve(discord_registry_path, 'config.json'))) {
+        let { confirmation } = await prompts({
+            type: 'confirm',
+            name: 'confirmation',
+            message: 'This project has already been prepared.\n would you like to overwrite it?',
+            initial: false
+        });
+
+        if (!confirmation) return console.log('GoodBye...');
+    }
+
     let data = await prompts([
         {
             type: 'text',
